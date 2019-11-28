@@ -7,6 +7,9 @@ export const FETCH_QUERY_OTHER = gql`
       createdAt
       jobs {
         title
+        company {
+          name
+        }
       }
     }
   }
