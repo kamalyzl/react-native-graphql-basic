@@ -6,10 +6,11 @@ import {
   StyleSheet,
   ActivityIndicator,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {useQuery} from '@apollo/react-hooks';
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation: {navigate}}) => {
   const {data, loading, error} = useQuery(FETCH_QUERY_OTHER);
   if (loading) {
     return (
@@ -21,20 +22,27 @@ export const HomeScreen = () => {
   if (error) {
     return (
       <View>
-        <Text>{error}</Text>
+        <Text style={styles.error}>{error}</Text>
       </View>
     );
   }
-  console.log(data);
-  console.log(data.cities);
   return (
     <ScrollView style={styles.containerItem}>
       {data.cities &&
         data.cities.map(launch => (
-          <View key={launch.name} style={styles.itemView}>
-            <Text>{launch.name}</Text>
+          <TouchableOpacity
+            key={launch.name}
+            style={styles.itemView}
+            onPress={() => {
+              console.log('click');
+              navigate('Details', {name: launch.name, jobs: launch.jobs});
+            }}>
+            <View style={styles.groupText}>
+              <Text>{launch.name}</Text>
+              <Text style={styles.dateText}>{launch.createdAt}</Text>
+            </View>
             <Text> > </Text>
-          </View>
+          </TouchableOpacity>
         ))}
     </ScrollView>
   );
@@ -63,5 +71,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
+  },
+  groupText: {
+    flexDirection: 'column',
+    marginBottom: 5,
+  },
+  dateText: {
+    color: '#828282',
+    fontSize: 8,
+  },
+  error: {
+    color: '#EC5757',
+    fontWeight: 'bold',
   },
 });

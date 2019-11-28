@@ -4,6 +4,10 @@ export const FETCH_QUERY_OTHER = gql`
   {
     cities {
       name
+      createdAt
+      jobs {
+        title
+      }
     }
   }
 `;
