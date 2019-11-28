@@ -22,6 +22,7 @@ const AppNavigator = createStackNavigator({
   Details: {
     screen: DetailsScreen,
     navigationOptions: {
+      headerTintColor: '#FFFFFF',
       headerStyle: {
         backgroundColor: '#000000',
       },

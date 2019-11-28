@@ -1,13 +1,11 @@
 import React from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
-import {HeaderBackButton} from 'react-navigation';
 import {List} from '../components/List';
 
 export default class DetailsSreen extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: navigation.getParam('name'),
-      // headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} />,
     };
   };
   render() {
